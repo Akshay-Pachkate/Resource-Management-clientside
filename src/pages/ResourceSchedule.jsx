@@ -164,81 +164,21 @@ const ResourceSchedule = () => {
     }
   };
 
-  const bookings = [
-    {
-      bookedBy: "Prasanna Pande",
-      Position: "VC",
-      Title: "Conducting SIG's for First Year",
-      startDate: 6,
-      endDate: 6,
-      startTime: 9,
-      endTime: 9,
-      month: 3
-    },
-    {
-      bookedBy: "Prasanna Pande",
-      Position: "VC",
-      Title: "Conducting SIG's for First Year",
-      startDate: 7,
-      endDate: 7,
-      startTime: 13,
-      endTime: 16,
-      month: 3
-    },
-    {
-      bookedBy: "Prasanna Pande",
-      Position: "VC",
-      Title: "Conducting SIG's for First Year",
-      startDate: 8,
-      endDate: 8,
-      startTime: 4,
-      endTime: 5,
-      month: 3
-    }
-    ,    {
-      bookedBy: "Prasanna Pande",
-      Position: "VC",
-      Title: "Conducting SIG's for First Year",
-      startDate: 9,
-      endDate: 9,
-      startTime: 4,
-      endTime: 10,
-      month: 3
-    }
-    ,    {
-      bookedBy: "Prasanna Pande",
-      Position: "VC",
-      Title: "Conducting SIG's for First Year",
-      startDate: 9,
-      endDate: 9,
-      startTime: 12,
-      endTime: 15,
-      month: 3
-    }
-  ];
+
 
   return (
     <>
       <Navbar/>
-      <div className="mt-8 flex gap-8 items-center justify-between">
+      <div className="mt-8 flex-wrap-reverse flex gap-8 items-center justify-between  ">
         
-        <div className="flex gap-8 items-center">
+        <div className="flex gap-8 items-center max-sm:mx-auto">
+          
           <div className="flex gap-2">
-            <button
-              className="text-primary text-5xl  rounded-md"
-              onClick={() => {
-                getPrevWeek();
-              }}
-            >
+            <button className="text-primary text-5xl  rounded-md" onClick={() => {getPrevWeek();}}>
               <FaRegArrowAltCircleLeft />
             </button>
 
-            <button
-              className="text-primary text-5xl  rounded-md"
-              onClick={() => {
-                getNextWeek();
-              }}
-            >
+            <button className="text-primary text-5xl  rounded-md" onClick={() => {getNextWeek();}}>
               <FaRegArrowAltCircleRight />
             </button>
           </div>
@@ -256,9 +196,10 @@ const ResourceSchedule = () => {
               </ThemeProvider>
             </LocalizationProvider>
           </div>
+
         </div>
 
-        <div>
+        <div className="max-sm:mx-auto" >
           <h1 className="text-3xl underline  font-semibold">{resName}</h1> 
         </div>
 

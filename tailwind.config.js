@@ -10,6 +10,9 @@ export default {
         primary: "#007BFF",
         secondary: "#222222",
       },
+      width: {
+        '3ch': '3ch',
+      },
       screens: {
         'xs': '320px',
     

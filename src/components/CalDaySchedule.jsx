@@ -58,8 +58,8 @@ console.log(bookedSlots);
             {/* <div>{flagIsBlocked+ "1"}</div> */}
             {i === 1 && (
               <div className="flex flex-col gap-[2px] items-start px-2">
-                <h3 className="sm:hidden md:block">{date}</h3>
-                <h6 className="text-md  ">{day}</h6>
+                <h3 className="">{date}</h3>
+                <h6 className="text-md w-3ch  overflow-hidden sm:w-auto">{day}</h6>
               </div>
             )}
             {/* above block handle 1 row of header of column */}
