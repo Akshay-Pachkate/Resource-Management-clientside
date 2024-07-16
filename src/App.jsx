@@ -14,7 +14,7 @@ import { UserContext, UserContextProvider } from "./context/userContext"
 import {SnackbarProvider} from 'notistack';
 import { useContext, useEffect, useState } from "react"
 
-axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL = 'https://pictresourcemanagement.pythonanywhere.com';
 axios.defaults.withCredentials = true;
 
 

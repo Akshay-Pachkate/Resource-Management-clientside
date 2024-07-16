@@ -33,9 +33,9 @@ const Navbar = () => {
     
   }, [login, isUserInfoReady, user]);
   
-  if (!isUserInfoReady) {
-    return <Spinner />;
-  }
+  // if (!isUserInfoReady) {
+  //   return <Spinner />;
+  // }
   
 
   return (
