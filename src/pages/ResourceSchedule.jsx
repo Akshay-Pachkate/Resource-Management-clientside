@@ -171,7 +171,7 @@ const ResourceSchedule = () => {
       <Navbar/>
       <div className="mt-8 flex-wrap-reverse flex gap-8 items-center justify-between  ">
         
-        <div className="flex gap-8 items-center max-sm:mx-auto">
+        <div className="flex gap-8 items-center max-sm:justify-between max-sm:w-[100%]">
           
           <div className="flex gap-2">
             <button className="text-primary text-5xl  rounded-md" onClick={() => {getPrevWeek();}}>
@@ -199,7 +199,7 @@ const ResourceSchedule = () => {
 
         </div>
 
-        <div className="max-sm:mx-auto" >
+        <div className="max-sm:hidden" >
           <h1 className="text-3xl underline  font-semibold">{resName}</h1> 
         </div>
 
