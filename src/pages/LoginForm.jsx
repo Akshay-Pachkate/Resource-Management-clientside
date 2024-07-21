@@ -5,6 +5,7 @@ import {Navigate} from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import Navbar from '../components/Navbar';
 import { UserContext } from '../context/userContext';
+import Cookie from 'js-cookie';
 
 
 
@@ -17,13 +18,16 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const {data} = await axios.post('/login/', {email, password});
-            if(data.status === 200){
+            const response = await axios.post('/login/', {email, password, withCredentials: true});
+
+            console.log(Cookie.get('csrftoken'));
+
+            if(response.data.status === 200){
                 setRedirect(true);
-                enqueueSnackbar("Login Successful", {variant: 'success'}) 
-                setUser(data.userDetails);
+                enqueueSnackbar("Login Successful", {variant: 'success'}, {autoHideDuration: 2000}) 
+                setUser(response.data.userDetails);
             }else 
-                enqueueSnackbar(`Login Failed ${data.message}`, {variant: 'error'}, {autoHideDuration: 2000})
+                enqueueSnackbar(`Login Failed ${response.data.message}`, {variant: 'error'}, {autoHideDuration: 2000})
         } catch (error) {
             console.error(error);
         }
