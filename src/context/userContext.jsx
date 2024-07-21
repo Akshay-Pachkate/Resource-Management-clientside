@@ -25,7 +25,7 @@ export const UserContextProvider = ({ children }) => {
         )
         .then(({ data }) => {
           if(data.status === 200){
-            setUser(data);
+            setUser(data.userDetails);
           }  
           setIsUserInfoReady(true);
         })

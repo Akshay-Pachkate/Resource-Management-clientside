@@ -6,7 +6,6 @@ import Spinner from "../components/Spinner";
 const Dashboard = () => {
 
 
-
   return (
     <>
       <Navbar />

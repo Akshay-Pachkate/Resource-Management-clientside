@@ -21,7 +21,7 @@ const Register = () => {
   const [isAdmin, setIsAdmin] = useState(null);
 
   useEffect(() => {
-    if(isUserInfoReady && user && user["userDetails"] && user["userDetails"].is_admin){
+    if(isUserInfoReady && user && user.is_admin){
       setIsAdmin(true);
     }
   }, [isAdmin, isUserInfoReady, user]);

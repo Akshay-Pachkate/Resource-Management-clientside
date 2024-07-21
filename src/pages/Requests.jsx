@@ -1,17 +1,18 @@
 
 import RequestInfo from "../components/RequestInfo";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Spinner from "../components/Spinner"
 import axios from "axios";
-import { getCookie } from "../utilities/getCSRF";
 import { Navigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { UserContext } from "../context/userContext";
 
 const Requests = () => {
 
   const [requests, setRequests] = useState(null);
   const [reload, setReload] = useState(false);
-  const [login, setLogin] = useState(getCookie("csrftoken"));
+  const {user} = useContext(UserContext);
+  const [login, setLogin] = useState(user);
 
   
   useEffect(() => {
@@ -21,16 +22,13 @@ const Requests = () => {
     .then((res) => {
         const {data} = res;
         setRequests(data.data.reverse());
-        setLogin(getCookie("csrftoken"));
-        console.log(data.data);
-        console.log("fetched requests....");
       })
       .catch((err) => {
         console.log(err);
       });
     },[reload, login]);
     
-    if(login === ""){
+    if(!login){
       return <Navigate to="/login" />
     }
 

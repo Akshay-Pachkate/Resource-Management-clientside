@@ -6,6 +6,7 @@ import { enqueueSnackbar } from 'notistack';
 import Navbar from '../components/Navbar';
 import { UserContext } from '../context/userContext';
 import Cookie from 'js-cookie';
+import { getCookie } from '../utilities/getCSRF';
 
 
 
@@ -20,7 +21,8 @@ const Login = () => {
         try {
             const response = await axios.post('/login/', {email, password, withCredentials: true});
 
-            console.log(Cookie.get('csrftoken'));
+            console.log(Cookie.get('csrftoken'));    
+            console.log(getCookie('csrftoken'));
 
             if(response.data.status === 200){
                 setRedirect(true);

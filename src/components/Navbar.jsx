@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link, useParams } from "react-router-dom"
 import Button from "./Button"
-import { getCookie } from "../utilities/getCSRF"
+// import { getCookie } from "../utilities/getCSRF"
 import { useContext, useEffect, useState} from "react"
 import { UserContext } from "../context/userContext";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -9,25 +9,25 @@ import { RxHamburgerMenu } from "react-icons/rx";
 
 const Navbar = () => {
   const title = "Resource Management Portal"
-  const [login, setLogin] = useState(null);
   const [reqLinkStatus, setReqLinkStatus] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const {user, isUserInfoReady} = useContext(UserContext)
+  const [login, setLogin] = useState(false);
   const { resName } = useParams();
+
 
   
   useEffect(() => {
-    if(getCookie("csrftoken") !== ""){
-      setLogin(true);
-    } else {
-      setLogin(false);
-    }
 
-    if(isUserInfoReady && user && user["userDetails"] && user["userDetails"].Role === 0){
+    if(user){
+      setLogin(true);
+    }
+    
+    if(isUserInfoReady && user && user.Role === 0){
       setReqLinkStatus(true);
     }
     
-    if(isUserInfoReady && user && user["userDetails"] && user["userDetails"].is_admin){
+    if(isUserInfoReady && user && user.is_admin){
       setIsAdmin(true);
     }
     
@@ -55,12 +55,9 @@ const Navbar = () => {
             <div className="-mx-[10px] md:block">
                 <h1 className="text-2xl decoration-1 underline underline-offset-4 font-semibold text-white max-md:hidden">{title}</h1>
                 <h1 className="text-2xl decoration-1 underline underline-offset-2 font-semibold text-white max-sm:static sm:hidden">{resName}</h1>
-                {/* <div className={"-mx-6 sm:max-md:hidden border-t-white border mt-1 "}></div> */}
             </div>
 
             <div className="flex items-center gap-4 md:gap-6">
-                {/* <p className="text-xl text-white">Add User</p>
-                <p className="text-xl text-white">View Users</p> */}
                 <div className="max-sm:block hidden hover:cursor-pointer" >
                   <RxHamburgerMenu className="text-white text-4xl border-[2px] border-white  p-1 rounded-md" />
                 </div>

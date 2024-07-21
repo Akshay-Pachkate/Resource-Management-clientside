@@ -47,10 +47,9 @@ const Profile = () => {
   const [openChangePass, setOpenChangePass] = React.useState(false);
   const handleCloseChangePass = () => setOpenChangePass(false);
 
-  const { setUser } = useContext(UserContext);
   const [requests, setRequests] = useState(null);
-  const { user, isUserInfoReady } = useContext(UserContext);
-  const [login, setLogin] = useState(getCookie("csrftoken"));
+  const { user, setUser, isUserInfoReady } = useContext(UserContext);
+  const [login, setLogin] = useState(user);
   const [requestUpdate, setRequestUpdate] = useState(false);
 
 
@@ -116,7 +115,7 @@ const Profile = () => {
       });
   };
 
-  if (login === "") {
+  if (!login) {
     return <Navigate to="/login" />;
   }
 
@@ -131,16 +130,16 @@ const Profile = () => {
             <ReqFieldItem
               label="Name"
               value={
-                user["userDetails"].Username !== ""
-                  ? user["userDetails"].Username
+                user.Username !== ""
+                  ? user.Username
                   : "Add Name edit btn"
               }
             />
-            <ReqFieldItem label="Position" value={user["userDetails"].Role} />
-            <ReqFieldItem label="Email" value={user["userDetails"].email} />
+            <ReqFieldItem label="Position" value={user.Role} />
+            <ReqFieldItem label="Email" value={user.email} />
             <ReqFieldItem
               label="Organization"
-              value={user["userDetails"].organization}
+              value={user.organization}
             />
           </div>
         )}
