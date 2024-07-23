@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import Spinner from "../../components/Spinner";
+import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import { Navigate } from "react-router-dom";
 
@@ -7,36 +6,14 @@ import Button from '@mui/material/Button';
 
 
 const ViewUser = () => {
-  const [redirect, setRedirect] = useState(false);
-  const { user, isUserInfoReady } = useContext(UserContext);
-  const [isAdmin, setIsAdmin] = useState(null);
-  // const FIELDS = ["email", "role" ];
-
-  useEffect(() => {
-    if(isUserInfoReady && user && user.is_admin){
-      setIsAdmin(true);
-    }
-  }, [isAdmin, isUserInfoReady, user]);
+  const {user} = useContext(UserContext);
 
   
-  if (isAdmin === null || !isUserInfoReady) {
-    return <Spinner />;
-  }
-  if(!isAdmin){
-    return <Navigate to="/" />
-  }
   
-  if(isUserInfoReady && user && user["userDetails"] && user["userDetails"].is_admin !== true){
-    setRedirect(true);
-  }
-  if (isUserInfoReady && !user) {
-    setRedirect(true);
+  if (user && !user.is_admin) {
+    return <Navigate to="/" />;
   }
 
-
-  if (redirect) {
-    return <Navigate to="/login" />;
-  }
 
   return (
     <>

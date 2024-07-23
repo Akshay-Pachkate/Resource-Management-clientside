@@ -6,24 +6,16 @@ import FormControl from "@mui/material/FormControl";
 import {Navigate} from 'react-router-dom';
 import Select from "@mui/material/Select";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
-import Spinner from "../../components/Spinner";
 import { enqueueSnackbar } from "notistack";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [position, setPosition] = useState("");
-  const [redirect, setRedirect] = useState(false);
-  const {user, isUserInfoReady} = useContext(UserContext);
-  const [isAdmin, setIsAdmin] = useState(null);
+  const {user} = useContext(UserContext);
 
-  useEffect(() => {
-    if(isUserInfoReady && user && user.is_admin){
-      setIsAdmin(true);
-    }
-  }, [isAdmin, isUserInfoReady, user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -52,19 +44,9 @@ const Register = () => {
     setPosition("");
   };
 
-  if(isAdmin === null || !isUserInfoReady){
-    return <Spinner />;
-  }
-  if(!isAdmin){
-    return <Navigate to="/" />
-  }
 
 
-  if(isUserInfoReady && !user){
-    setRedirect(true);
-  }
-
-  if(redirect){
+  if(user && !user.is_admin){
     return <Navigate to="/login" />
   }
 

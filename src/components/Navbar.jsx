@@ -9,33 +9,34 @@ import { RxHamburgerMenu } from "react-icons/rx";
 
 const Navbar = () => {
   const title = "Resource Management Portal"
-  const [reqLinkStatus, setReqLinkStatus] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const {user, isUserInfoReady} = useContext(UserContext)
-  const [login, setLogin] = useState(false);
+  // const [reqLinkStatus, setReqLinkStatus] = useState(false);
+  // const [isAdmin, setIsAdmin] = useState(false);
+  // const {user, isUserInfoReady} = useContext(UserContext)
+  // const [login, setLogin] = useState(false);
+  const {user} = useContext(UserContext);
   const { resName } = useParams();
 
 
   
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log(document.cookie);
+  //   console.log(document.cookie);
 
-    if(user){
-      setLogin(true);
-    }
+  //   if(user){
+  //     setLogin(true);
+  //   }
     
-    if(isUserInfoReady && user && user.Role === 0){
-      setReqLinkStatus(true);
-    }
+  //   if(isUserInfoReady && user && user.Role === 0){
+  //     setReqLinkStatus(true);
+  //   }
     
-    if(isUserInfoReady && user && user.is_admin){
-      setIsAdmin(true);
-    }
+  //   if(isUserInfoReady && user && user.is_admin){
+  //     setIsAdmin(true);
+  //   }
     
-    console.log(user);
+  //   console.log(user);
     
-  }, [login, isUserInfoReady, user]);
+  // }, [login, isUserInfoReady, user]);
   
   // if (!isUserInfoReady) {
   //   return <Spinner />;
@@ -64,11 +65,11 @@ const Navbar = () => {
                   <RxHamburgerMenu className="text-white text-4xl border-[2px] border-white  p-1 rounded-md" />
                 </div>
                 <Button to="/" className="max-sm:hidden  hover:shadow-lg hover:text-primary hover:bg-white" name="Home"/>
-                <Button to="/admin/add" className={"max-sm:hidden hover:shadow-lg hover:text-primary hover:bg-white" + (isAdmin ? "" : " hidden ")} name="Add"/>
-                <Button to="/admin/view" className={"max-sm:hidden hover:shadow-lg hover:text-primary hover:bg-white" + (isAdmin ? "" : " hidden ")} name="View"/>
-                <Button to={login ? "/requests" : "/login"} className={"max-sm:hidden hover:shadow-lg hover:text-primary hover:bg-white " + (reqLinkStatus && " hidden ")} name="Requests" />
-                <Button to={login ? "/profile" : "/login"} className={"max-sm:hidden hover:shadow-lg hover:text-primary hover:bg-white "} name="Profile" />
-                <Button to={login ? "/" : "/login"} name="Login"  className={"max-sm:hidden hover:shadow-lg hover:bg-white hover:text-primary hover:underline hover:outline-none " + (!login ? "" : "hidden ")}/>
+                <Button to="/admin/add" className={"max-sm:hidden hover:shadow-lg hover:text-primary hover:bg-white" + (user && user.is_admin ? "" : " hidden ")} name="Add"/>
+                <Button to="/admin/view" className={"max-sm:hidden hover:shadow-lg hover:text-primary hover:bg-white" + (user && user.is_admin ? "" : " hidden ")} name="View"/>
+                <Button to={user ? "/requests" : "/login"} className={"max-sm:hidden hover:shadow-lg hover:text-primary hover:bg-white " + (user && user.Role < 2 && " hidden ")} name="Requests" />
+                <Button to={user ? "/profile" : "/login"} className={"max-sm:hidden hover:shadow-lg hover:text-primary hover:bg-white "} name="Profile" />
+                <Button to={user ? "/" : "/login"} name="Login"  className={"max-sm:hidden hover:shadow-lg hover:bg-white hover:text-primary hover:underline hover:outline-none " + (!user ? "" : "hidden ")}/>
             </div>
             
         </nav>

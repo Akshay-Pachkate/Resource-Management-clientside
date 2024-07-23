@@ -2,7 +2,6 @@
 import { useContext, useEffect, useState } from "react";
 import ProgressBar from "../components/ProgressBar";
 import ReqFieldItem from "../components/ReqFieldItem";
-import { deleteCookie, getCookie } from "../utilities/getCSRF";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
@@ -48,7 +47,6 @@ const Profile = () => {
 
   const [requests, setRequests] = useState(null);
   const { user, setUser, isUserInfoReady } = useContext(UserContext);
-  const [login, setLogin] = useState(user);
   const [requestUpdate, setRequestUpdate] = useState(false);
 
 
@@ -62,7 +60,7 @@ const Profile = () => {
         { mail: user.userDetails.email },
         {
           headers: {
-            "X-CSRFToken": getCookie("csrftoken"),
+            "X-CSRFToken": user && user["X-CSRFToken"].csrftoken,
           },
         }
       )
@@ -82,7 +80,7 @@ const Profile = () => {
     axios
       .get("/userrequests/", {
         headers: {
-          "X-CSRFToken": login,
+          "X-CSRFToken": user && user["X-CSRFToken"].csrftoken,
         },
       })
       .then(({ data }) => {
@@ -93,19 +91,17 @@ const Profile = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [login, requestUpdate]);
+  }, [requestUpdate, user]);
 
   const logout = () => {
     axios
       .get("/logout/", {
         headers: {
-          "X-CSRFToken": login,
+          "X-CSRFToken": user && user["X-CSRFToken"].csrftoken,
         },
       })
       .then(() => {
-        deleteCookie("csrftoken");
         setUser(null);
-        setLogin("");
         enqueueSnackbar("Logged out Successfully", { variant: "success" });
       })
       .catch((error) => {
@@ -114,7 +110,7 @@ const Profile = () => {
       });
   };
 
-  if (!login) {
+  if (!user) {
     return <Navigate to="/login" />;
   }
 
