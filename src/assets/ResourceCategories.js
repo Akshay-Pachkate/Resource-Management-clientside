@@ -10,3 +10,17 @@ export const ResourceCategories = {
     "Logistics": ["Mic", "Podium", "Camera"], 
     "Lawn & Court": ["Lawn", "basketball court"]
 };
+
+export const AllResources = [
+    {res: 'Auditorium F1', type: 'Auditoriums'},
+    {res: 'IT Seminar Hall', type: 'Auditoriums'},
+    {res: 'COMP Seminar Hall', type: 'Auditoriums'},
+    {res: 'ENTC Seminar Hall', type: 'Auditoriums'},
+    {res: 'F Building Display', type: 'Display Boards'},
+    {res: 'A1 Building Display', type: 'Display Boards'},
+    {res: 'Lawn', type: 'Lawn'},
+    {res: 'basketball court', type: 'Court'},
+    {res: 'Mic', type: 'Logistics'},
+    {res: 'Podium', type: 'Logistics'},
+    {res: 'Camera', type: 'Logistics'},
+];

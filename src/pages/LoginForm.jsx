@@ -3,7 +3,6 @@ import { useContext, useState } from 'react';
 import axios from "axios";
 import {Navigate} from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
-import Navbar from '../components/Navbar';
 import { UserContext } from '../context/userContext';
 import Cookie from 'js-cookie';
 import { getCookie } from '../utilities/getCSRF';
@@ -15,6 +14,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [redirect, setRedirect] = useState(false);
+    const {user} = useContext(UserContext);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -35,6 +35,10 @@ const Login = () => {
         }
     }
 
+    if(user){
+        return <Navigate to="/" />
+    }
+
     if(redirect) {
         return <Navigate to="/" />
     }
@@ -42,30 +46,29 @@ const Login = () => {
 
     return (
         <>
-        <Navbar/>
         <form className='flex justify-center justify-items-center' > 
 
 
-            <div className=' rounded-lg subpixel-antialiased flex flex-col justify-center justify-items-center shadow-lg bg-gray-50 py-12 my-32 max-w-[500px]  md:w-[70%] border sm:w-5/6 w-5/6'>
+            <div className=' rounded-lg  flex flex-col justify-center justify-items-center  bg-gray-50 py-8 my-32 max-w-[500px] max-md:bg-white max-md:shadow-none max-md:border-none md:w-[70%] border sm:w-5/6 w-5/6'>
 
-                <div className='text-center font-normal md:text-4xl text-3xl mb-16'>Login
+                <div className='text-center font-medium  md:text-4xl text-3xl mb-8'>Login
                 </div>
 
 
-                <div className='flex justify-center'>
+                <div className='flex justify-center w-[60%] mx-auto max-sm:w-[90%]'>
                     <TextField
                         id="email"
                         label="Email"
                         required
                         value={email}
-                        style={{ width: "60%", marginBottom: "20px" }}
+                        style={{ width: "100%", marginBottom: "20px" }}
                         onChange={(event) => setEmail(event.target.value)}
                     />
                 </div>
 
-                <div className='flex justify-center'>
+                <div className='flex justify-center w-[60%] mx-auto max-sm:w-[90%]'>
                     <TextField
-                        style={{ width: "60%", marginBottom: "12px" }}
+                        style={{ width: "100%", marginBottom: "12px" }}
                         required
                         type="password"
                         id="password"
@@ -75,9 +78,9 @@ const Login = () => {
                     />
                 </div>
 
-                <div className='subpixel-antialiased mb-2 text-blue-500 flex justify-center'>
-                    <div style={{ width: "60%" }}>
-                        <a href="#" >Forget Passswod?</a>
+                <div className='mb-2 text-blue-500 flex justify-center'>
+                    <div >
+                        <a href="#" >Forgot Password?</a>
                     </div>
                 </div>
 

@@ -12,15 +12,15 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import axios from 'axios';
-import { getCookie } from '../utilities/getCSRF';
 
 import utc from 'dayjs/plugin/utc';
 import dayjs from 'dayjs';
 import { enqueueSnackbar } from 'notistack';
 import { eightAM, eightPM, isValidBooking } from '../utilities/valid';
+import { UserContext } from '../context/userContext';
 
 dayjs.extend(utc);
 
@@ -34,6 +34,7 @@ export default function BookSlot({ handleClose, currDateTime, resource }) {
     const [endTime, setEndTime] = useState( startTime ? startTime.add(0.5, 'hour') : null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const {user} = useContext(UserContext);
 
 
     const getDateTimeReqFmt = (givenObject) => {
@@ -46,14 +47,19 @@ export default function BookSlot({ handleClose, currDateTime, resource }) {
     const handleBooking = async (event) => {
         try {
             event.preventDefault();
-                        
+
             const start_time = getDateTimeReqFmt(startTime);
             const end_time = getDateTimeReqFmt(endTime);
     
-            const csrfToken = getCookie("csrftoken");
 
-
-            if(title === '' || description === ""){ 
+            if(!user){
+                enqueueSnackbar('Login Required', {
+                    variant: 'warning', 
+                    anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'center'}
+                });
+            }else if(title === '' || description === ""){ 
                 enqueueSnackbar('Title & Description are required', {
                     variant: 'warning', 
                     anchorOrigin: {
@@ -70,7 +76,7 @@ export default function BookSlot({ handleClose, currDateTime, resource }) {
                         },
                         {
                             headers: {
-                            "X-CSRFToken": csrfToken, 
+                            "X-CSRFToken": user['X-CSRFToken'].csrftoken, 
                             },
                         }
                         );

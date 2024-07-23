@@ -57,15 +57,15 @@ console.log(bookedSlots);
             
             {/* <div>{flagIsBlocked+ "1"}</div> */}
             {i === 1 && (
-              <div className="flex flex-col gap-[2px] items-start px-2">
-                <h3 className="">{date}</h3>
-                <h6 className="text-md w-3ch  overflow-hidden sm:w-auto">{day}</h6>
+              <div className="flex flex-col gap-[2px]  items-start px-2">
+                <h3 className="max-sm:text-base">{date}</h3>
+                <h6 className="text-md max-sm:text-lg w-3ch max-sm:font-mono overflow-hidden sm:w-auto">{day}</h6>
               </div>
             )}
             {/* above block handle 1 row of header of column */}
 
 
-            {times && i % 2 === 0 && <h3 className='-mt-2'>{times[i]}</h3>}
+            {times && i % 2 === 0 && <h3 className='-mt-2 max-sm:text-lg max-sm:font-mono'>{times[i]}</h3>}
             {/* this is used for handle 0th index row  */}
 
             {/* {!times && i === 14 && <div className="absolute h-[120px] w-[90%] rounded-xl left-1 opacity-70 bg-blue-400 z-10 top-0" ></div>} */}
@@ -81,7 +81,6 @@ console.log(bookedSlots);
               slot.endTime >= i && slot.startTime <= i && slot.startDate === date && month === slot.month ?  (
                 // (flagIsBlocked = true)
                 <div
-                  onClick={() => console.log("Clicked")}
                   key={index}
                   className={
                     " booked_slot " +
@@ -90,7 +89,7 @@ console.log(bookedSlots);
                     (slot.endTime === i && " h-[98%] mb-[2px] rounded-b-md ")
                   }
                 >
-                  {slot.startTime == i && <div className='text-sm text-center truncate text-gray-800'>~ {slot.bookedBy}</div>}
+                  {slot.startTime == i && <div className='text-sm text-center z-100 text-gray-800 break-all'>~ {slot.bookedBy}</div>}
                   
                 </div>
               )            :       null

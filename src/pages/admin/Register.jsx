@@ -8,9 +8,8 @@ import Select from "@mui/material/Select";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/userContext";
-import { getCookie } from "../../utilities/getCSRF";
 import Spinner from "../../components/Spinner";
-import Navbar from "../../components/Navbar";
+import { enqueueSnackbar } from "notistack";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -29,8 +28,6 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const csrfToken = getCookie("csrftoken");
-
     const response = await axios.post(
       "/adminmonitor/",
       {
@@ -39,13 +36,16 @@ const Register = () => {
       },
       {
         headers: {
-          "X-CSRFToken": csrfToken, 
+          "X-CSRFToken": user && user["X-CSRFToken"].csrftoken, 
         },
       }
     );
 
-    alert("User Registered");
-    console.log(response);
+    if(response.status === 200){
+      enqueueSnackbar("User Added Successfully", {variant: 'success'}, {autoHideDuration: 2000});
+    }else{
+      enqueueSnackbar("User Addition Failed", {variant: 'error'}, {autoHideDuration: 2000});
+    }
 
     setEmail("");
     setName("");
@@ -72,7 +72,6 @@ const Register = () => {
 
   return (
     <>
-    <Navbar/>
       <form
         className="flex justify-center justify-items-center"
         onSubmit={(event) => handleSubmit(event)}

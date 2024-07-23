@@ -19,6 +19,8 @@ const Navbar = () => {
   
   useEffect(() => {
 
+    console.log(document.cookie);
+
     if(user){
       setLogin(true);
     }
@@ -53,7 +55,7 @@ const Navbar = () => {
             </Link>
 
             <div className="-mx-[10px] md:block">
-                <h1 className="text-2xl decoration-1 underline underline-offset-4 font-semibold text-white max-md:hidden">{title}</h1>
+                <h1 className="text-2xl decoration-1 underline underline-offset-4 font-semibold text-white max-lg:hidden">{title}</h1>
                 <h1 className="text-2xl decoration-1 underline underline-offset-2 font-semibold text-white max-sm:static sm:hidden">{resName}</h1>
             </div>
 

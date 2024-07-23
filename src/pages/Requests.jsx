@@ -1,10 +1,10 @@
+/* eslint-disable no-unused-vars */
 
 import RequestInfo from "../components/RequestInfo";
 import { useContext, useEffect, useState } from "react";
 import Spinner from "../components/Spinner"
 import axios from "axios";
 import { Navigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import { UserContext } from "../context/userContext";
 
 const Requests = () => {
@@ -35,7 +35,6 @@ const Requests = () => {
 
   return (
     <>
-      <Navbar/>
       <div className="h-full flex content-center justify-center">
 
         <div className="p-2 m-2 w-9/12">

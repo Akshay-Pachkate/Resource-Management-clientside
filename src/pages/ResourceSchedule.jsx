@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import { useParams } from "react-router-dom";
+import { useParams, useRouteError } from "react-router-dom";
 import CalDaySchedule from "../components/CalDaySchedule";
 import { getDay } from "../utilities/dateUtils";
 import { time } from "../assets/Times";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import utc from "dayjs/plugin/utc";
 
 
@@ -28,6 +28,8 @@ import Modal from '@mui/material/Modal';
 import { getCookie } from "../utilities/getCSRF.js";
 import { getTimeIndex } from "../utilities/timeUtils.js";
 import Navbar from "../components/Navbar.jsx";
+import { UserContext } from "../context/userContext.jsx";
+import Spinner from "../components/Spinner.jsx";
 
 
 dayjs.extend(utc);
@@ -49,6 +51,7 @@ const style = {
 
 const ResourceSchedule = () => {
 
+  const {user} = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [currDateTime, setCurrDateTime] = useState(null);
 
@@ -64,9 +67,7 @@ const ResourceSchedule = () => {
 
 
   useEffect(() => {
-
-    
-      const csrftoken = getCookie('csrftoken');
+    setBooking(null);
       axios
         .put(
           `/resourcedetail/${resName.replace(/ /g, '')}`,
@@ -75,7 +76,7 @@ const ResourceSchedule = () => {
           },
           {
             headers: {
-              "X-CSRFToken": csrftoken,
+              "X-CSRFToken": user && user['X-CSRFToken'].csrftoken,
             }
           }
         )
@@ -87,9 +88,12 @@ const ResourceSchedule = () => {
         });
 
 
-  }, [currDate, resName]);
+  }, [currDate, resName, user]);
 
   const arr = [];
+
+
+
 
   
 
@@ -166,9 +170,51 @@ const ResourceSchedule = () => {
 
 
 
+  if(!booking){
+    return <>
+    <div className="mt-8 flex-wrap-reverse flex gap-8 items-center justify-between  ">
+        
+        <div className="flex gap-8 items-center max-sm:justify-between max-sm:w-[100%]">
+          
+          <div className="flex gap-2">
+            <button className="text-primary text-5xl  rounded-md" onClick={() => {getPrevWeek();}}>
+              <FaRegArrowAltCircleLeft />
+            </button>
+
+            <button className="text-primary text-5xl  rounded-md" onClick={() => {getNextWeek();}}>
+              <FaRegArrowAltCircleRight />
+            </button>
+          </div>
+
+          <div>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <ThemeProvider theme={newTheme}>
+                <DatePicker
+                  disablePast
+                  label={`Check Availability of ${resName}`}
+                  value={currDate}
+                  onChange={(date) => setCurrDate(date.date(date.date() - 3))}
+                  defaultValue={currDate}
+                />
+              </ThemeProvider>
+            </LocalizationProvider>
+          </div>
+
+        </div>
+
+        <div className="max-sm:hidden" >
+          <h1 className="text-3xl underline  font-semibold">{resName}</h1> 
+        </div>
+
+      </div>
+    <Spinner />
+    </>;
+  }
+
+
+
   return (
     <>
-      <Navbar/>
       <div className="mt-8 flex-wrap-reverse flex gap-8 items-center justify-between  ">
         
         <div className="flex gap-8 items-center max-sm:justify-between max-sm:w-[100%]">

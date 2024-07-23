@@ -8,7 +8,6 @@ import { Navigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { UserContext } from "../context/userContext";
 import { enqueueSnackbar } from "notistack";
-import Navbar from "../components/Navbar";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -123,7 +122,6 @@ const Profile = () => {
 
   return (
     <>
-      <Navbar />
       <div className=" mx-auto rounded-xl  grid grid-cols-4 gap-4 p-6 w-[99%] sm:w-[70%] md:[60%] mt-8 bg-gray-100">
         {isUserInfoReady && user && (
           <div className="col-span-3 gap-6  grid grid-cols-2 px-4 ">

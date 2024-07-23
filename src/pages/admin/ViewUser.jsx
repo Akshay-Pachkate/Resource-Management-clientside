@@ -4,7 +4,6 @@ import { UserContext } from "../../context/userContext";
 import { Navigate } from "react-router-dom";
 
 import Button from '@mui/material/Button';
-import Navbar from "../../components/Navbar";
 
 
 const ViewUser = () => {
@@ -41,8 +40,6 @@ const ViewUser = () => {
 
   return (
     <>
-
-      <Navbar/>
 
       <div className="flex mt-12 flex-row flex-wrap justify-center">
 
