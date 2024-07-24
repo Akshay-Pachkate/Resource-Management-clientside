@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { HashRouter, Route, Routes } from "react-router-dom"
 import Layout from "./layouts/Layout"
 import Dashboard from "./pages/Dashboard"
 import RequestPage from "./pages/RequestPage"
@@ -40,19 +40,21 @@ const App = () => {
         vertical: 'top',
         horizontal: 'left',
       }}>
-        <Routes>
-          <Route path="/" element={<Layout/>}>
-            <Route index element={<Dashboard/>} />
-            <Route path="/request" element={<RequestPage/>} />
-            <Route path="/requests" element={<Requests/>} />
-            <Route path="/profile" element={<Profile/>} />
-            <Route path="/resource/:resName" element={<ResourceSchedule/>} />
-            <Route path="/admin/add" element={<Register/>} />
-            <Route path="/login" element={<LoginForm/>} />
-            <Route path="/bookSlot" element={<BookSlot/>} />
-            <Route path="/admin/view" element={<ViewUser/>} />
-          </Route>
-        </Routes>
+        <HashRouter>
+          <Routes>
+            <Route path="/" element={<Layout/>}>
+              <Route index element={<Dashboard/>} />
+              <Route path="/request" element={<RequestPage/>} />
+              <Route path="/requests" element={<Requests/>} />
+              <Route path="/profile" element={<Profile/>} />
+              <Route path="/resource/:resName" element={<ResourceSchedule/>} />
+              <Route path="/admin/add" element={<Register/>} />
+              <Route path="/login" element={<LoginForm/>} />
+              <Route path="/bookSlot" element={<BookSlot/>} />
+              <Route path="/admin/view" element={<ViewUser/>} />
+            </Route>
+          </Routes>
+        </HashRouter>
       </SnackbarProvider>
     </UserContextProvider>
   )
