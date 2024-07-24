@@ -51,7 +51,7 @@ const Requests = () => {
 
           {requests && !requests.length && 
             <div className="flex justify-center items-center w-[70%] mx-auto">
-              <h2 className="text-5xl font-bold text-[#ec4464]" >All Done... <br />No Requests</h2>
+              <h2 className="text-5xl max-sm:text-2xl smd:max-md:text-3xl font-bold text-[#ec4464]" >All Done... <br />No Requests</h2>
               <img className="" src="images/no-req-img.avif" alt="No Requests" />
             </div>
           }

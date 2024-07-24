@@ -7,6 +7,8 @@ import ReqFieldItem from "./ReqFieldItem";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
 import { getCookie } from "../utilities/getCSRF";
+import { X } from "@mui/icons-material";
+import XIcon from "./XIcon";
 
 
 const ProgressBar = ({ steps, request, setRequestUpdate}) => {
@@ -24,23 +26,26 @@ const ProgressBar = ({ steps, request, setRequestUpdate}) => {
   }
 
   return (
-    <div className="flex flex-col gap-6  items-start justify-center  mx-auto bg-gray-100 rounded-2xl w-[99%] sm:w-[70%] md:[60%] py-8 px-4 " >
-        <div className="mx-auto w-[80%] justify-between flex gap-4">
-          <div className="flex gap-4 h-[60px]">
+    <div className="flex flex-col gap-6  items-start justify-center relative  mx-auto bg-gray-100 rounded-2xl max-sm:w-full sm:max-md:w-[99%] md:w-[80%] py-8 px-4 " >
+        <div onClick={cancelRequest} className="bg-red-600 hover:cursor-pointer rounded-full absolute sm:hidden max-sm:-top-3 max-sm:-right-3" >
+          <XIcon className={'max-sm:w-8 max-sm:h-8'} />
+        </div>
+        <div className="mx-auto w-fit justify-between flex gap-4">
+          <div className="flex gap-4 ">
               <ReqFieldItem label={"Resource"} value={request["Resource"]} />
               <ReqFieldItem label={"Date"} value={request["Date"]}/>
               <ReqFieldItem label={"Timing"} value={request["Timing"]}/>
           </div>
           <button 
-          className={"text-md my-auto transition-all duration-300 text-center hover:scale-105 font-semibold text-white   border border-white px-4 py-2 cursor-pointer rounded-xl " + ((request.index === (request.length-1)) ? " bg-green-600 " : " bg-red-500 ")}
+          className={"text-md max-sm:hidden flex h-full justify-center items-center my-auto transition-all duration-300 text-center hover:scale-105 font-semibold text-white   border border-white px-4 py-2 cursor-pointer rounded-xl " + ((request.index === (request.length-1)) ? " bg-green-600 " : " bg-red-500 ")}
             onClick={ ((request.index !== (request.length-1)) && cancelRequest )}
           >
-
-          {((request.index !== (request.length-1)) ? " Cancel Request " : " Completed ")}
+            <span>{(request.index !== (request.length-1)) && <XIcon className="w-5 h-5" />}</span>
+            <span>{((request.index !== (request.length-1)) ? " Cancel " : " Completed ")}</span>
 
           </button>
         </div>
-        <div className="w-full mx-auto border-t pt-8 mt-4" >
+        <div className="w-full border-t pt-8 mt-4" >
         <Box sx={{ width: "100%"}} >
           <Stepper activeStep={request.index + 1} alternativeLabel>
             {steps.map((label) => (

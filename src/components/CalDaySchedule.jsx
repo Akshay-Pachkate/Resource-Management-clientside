@@ -47,7 +47,7 @@ console.log(bookedSlots);
             // this handle onclick action on cell
 
             className={
-              " border-b even:border-dotted  last:border-b-0 text-center text-xl font-medium pt-[6px] text-black first:bg-gray-200 border-gray-600 relative  " +
+              " border-b even:border-dotted -z-30  last:border-b-0 text-center text-xl font-medium pt-[6px] text-black first:bg-gray-200 border-gray-600 relative  " +
               (times && " pt-0 bg-gray-200 ") +
               (i == 1 ? " h-16 " : " h-10 ")+
               ((!times && i != 1) && "  hover:bg-gray-100  ")
@@ -57,9 +57,9 @@ console.log(bookedSlots);
             
             {/* <div>{flagIsBlocked+ "1"}</div> */}
             {i === 1 && (
-              <div className="flex flex-col gap-[2px]  items-start px-2">
-                <h3 className="max-sm:text-base">{date}</h3>
-                <h6 className="text-md max-sm:text-lg w-3ch max-sm:font-mono overflow-hidden sm:w-auto">{day}</h6>
+              <div className="flex flex-col -z-30 gap-[2px]  items-start px-2">
+                <h3 className="max-sm:text-base -z-40">{date}</h3>
+                <h6 className="text-md max-sm:text-lg -z-40 w-3ch max-sm:font-mono overflow-hidden sm:w-auto">{day}</h6>
               </div>
             )}
             {/* above block handle 1 row of header of column */}
@@ -89,7 +89,10 @@ console.log(bookedSlots);
                     (slot.endTime === i && " h-[98%] mb-[2px] rounded-b-md ")
                   }
                 >
-                  {slot.startTime == i && <div className='text-sm text-center z-100 text-gray-800 break-all'>~ {slot.bookedBy}</div>}
+                  {slot.startTime == i && <div className='text-sm text-center  text-gray-800 max-sm:truncate sm:break-all'>
+                    <span className='max-sm:hidden' >~</span>
+                    {slot.bookedBy}
+                    </div>}
                   
                 </div>
               )            :       null
@@ -108,7 +111,7 @@ console.log(bookedSlots);
     return div;
   };
   const divs = createDivs(25 , clickHandler);
-  return <div>{divs}</div>;
+  return <div className='-z-40' >{divs}</div>;
 };
 
 export default CalDaySchedule;

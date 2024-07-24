@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { GiHamburgerMenu } from "react-icons/gi";
 
-const HamIcon = () => {
+const HamIcon = ({className}) => {
   return (
-    <GiHamburgerMenu className="text-white text-3xl" />
+    <GiHamburgerMenu className={"text-white text-3xl " + className} />
   )
 }
 

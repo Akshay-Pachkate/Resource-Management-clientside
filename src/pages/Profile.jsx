@@ -106,7 +106,7 @@ const Profile = () => {
         enqueueSnackbar("Logged out Successfully", { variant: "success" });
       })
       .catch((error) => {
-        enqueueSnackbar("Something went wrong", { variant: "error" });
+        enqueueSnackbar("Something went wrong", { variant: "error" });  
         console.log(error);
       });
   };

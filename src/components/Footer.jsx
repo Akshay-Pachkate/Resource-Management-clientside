@@ -5,7 +5,7 @@ import { MdEmail } from "react-icons/md";
 const Footer = () => {
   return (
     <div className=" -mx-4 md:-mx-20 bg-primary rounded-t-xl h-60 mt-28 relative flex justify-center ">
-        <div className="bg-secondary w-[72%] h-full md:h-[90%] max-sm:w-[93%] rounded-xl border absolute -top-20 flex-col flex md:flex-row justify-around md:items-center p-4">
+        <div className="bg-secondary w-[72%] h-full md:h-[90%] max-sm:w-[95%] rounded-xl border absolute -top-20 flex-col flex md:flex-row justify-around md:items-center p-4">
             <div className="text-[#B6B6B6] text-3xl max-sm:text-xl sm:max-md:text-2xl text-center flex flex-col items-center gap-2">
                 <IoCall />
                 <h4 className="text-[#B6B6B6]">1234567890</h4>

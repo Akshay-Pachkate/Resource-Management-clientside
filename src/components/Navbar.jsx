@@ -22,7 +22,7 @@ const Navbar = () => {
 
   return (
     <>
-    <header className="bg-primary h-16  lg:h-[73px] -mx-4 md:-mx-20 flex-wrap px-4 md:px-20 flex justify-center items-center sticky top-0 z-20 rounded-b-xl">
+    <header className="bg-primary h-16  lg:h-[73px] flex-wrap -mx-4 md:-mx-20 px-4 md:px-20 flex justify-center items-center sticky top-0 z-50 rounded-b-xl">
         <nav className="flex items-center justify-between w-full">
             
             <Link to={'/'}>
@@ -50,13 +50,13 @@ const Navbar = () => {
             </div>
         </nav>
 
-        {isOpen && <div className="flex flex-col  bg-primary  w-full sm:hidden">
-            <Link to="/" className="text-white hover:bg-[#006eff] text-center text-lg font-semibold border-t w-full p-2">Home</Link>
-            <Link to="/admin/add" className={"text-white hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>Add</Link>
-            <Link to="/admin/view" className={"text-white hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>View</Link>
-            <Link to={user ? "/requests" : "/login"} className={"text-white hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.Role < 2 && " hidden ")}>Requests</Link>
-            <Link to={user ? "/profile" : "/login"} className="text-white hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 ">Profile</Link>
-            <Link to={user ? "/" : "/login"} className={"text-white hover:bg-[#006eff] text-center text-lg font-semibold border-y p-2 " + (!user ? "" : "hidden ")}>Login</Link>
+        {isOpen && <div className="flex flex-col z-50 bg-primary  w-full rounded-b-md sm:hidden">
+            <Link to="/" className="text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t w-full p-2">Home</Link>
+            <Link to="/admin/add" className={"text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>Add</Link>
+            <Link to="/admin/view" className={"text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>View</Link>
+            <Link to={user ? "/requests" : "/login"} className={"text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.Role < 2 && " hidden ")}>Requests</Link>
+            <Link to={user ? "/profile" : "/login"} className="text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 ">Profile</Link>
+            <Link to={user ? "/" : "/login"} className={"text-white z-50 hover:bg-[#006eff]  text-center text-lg font-semibold border-y p-2 " + (!user ? "" : "hidden ")}>Login</Link>
         </div>}
 
     </header>
