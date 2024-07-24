@@ -224,7 +224,7 @@ const ResourceSchedule = () => {
 
   return (
     <>
-      <div className="mt-8 -z-40 flex-wrap-reverse flex gap-8 items-center justify-between  ">
+      <div className="mt-8  flex-wrap-reverse flex gap-8 items-center justify-between  ">
         
         <div className="flex gap-8 items-center max-sm:justify-between max-sm:w-[100%]">
           
