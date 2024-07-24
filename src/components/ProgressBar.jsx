@@ -7,7 +7,6 @@ import ReqFieldItem from "./ReqFieldItem";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
 import { getCookie } from "../utilities/getCSRF";
-import { X } from "@mui/icons-material";
 import XIcon from "./XIcon";
 
 
@@ -30,7 +29,7 @@ const ProgressBar = ({ steps, request, setRequestUpdate}) => {
         <div onClick={cancelRequest} className="bg-red-600 hover:cursor-pointer rounded-full absolute sm:hidden max-sm:-top-3 max-sm:-right-3" >
           <XIcon className={'max-sm:w-8 max-sm:h-8'} />
         </div>
-        <div className="mx-auto w-fit justify-between flex gap-4">
+        <div className="mx-auto w-[90%] justify-around flex gap-4">
           <div className="flex gap-4 ">
               <ReqFieldItem label={"Resource"} value={request["Resource"]} />
               <ReqFieldItem label={"Date"} value={request["Date"]}/>

@@ -39,7 +39,7 @@ const Navbar = () => {
 
             <div className="flex items-center gap-4 md:gap-6">
                 <div className="max-sm:block hidden hover:cursor-pointer" onClick={toggleNav} >
-                  {isOpen ? <XIcon/> : <HamIcon/>}
+                  {isOpen ? <XIcon className={'w-10'} /> : <HamIcon className={'w-10'} />}
                 </div>
                 <Button to="/" className="max-sm:hidden  hover:shadow-lg hover:text-primary hover:bg-white" name="Home"/>
                 <Button to="/admin/add" className={"max-sm:hidden hover:shadow-lg hover:text-primary hover:bg-white" + (user && user.is_admin ? "" : " hidden ")} name="Add"/>
@@ -50,7 +50,7 @@ const Navbar = () => {
             </div>
         </nav>
 
-        {isOpen && <div className="flex flex-col z-50 bg-primary  w-full rounded-b-md sm:hidden">
+        {isOpen && <div className="flex flex-col z-50 bg-primary  w-full rounded-b-lg sm:hidden">
             <Link to="/" className="text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t w-full p-2">Home</Link>
             <Link to="/admin/add" className={"text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>Add</Link>
             <Link to="/admin/view" className={"text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>View</Link>
