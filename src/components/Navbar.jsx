@@ -1,51 +1,28 @@
 /* eslint-disable react/prop-types */
 import { Link, useParams } from "react-router-dom"
 import Button from "./Button"
-// import { getCookie } from "../utilities/getCSRF"
-import { useContext, useEffect, useState} from "react"
+import { useContext, useState} from "react"
 import { UserContext } from "../context/userContext";
-import { RxHamburgerMenu } from "react-icons/rx";
+import HamIcon from "./HamIcon";
+import XIcon from "./XIcon";
+
 
 
 const Navbar = () => {
   const title = "Resource Management Portal"
-  // const [reqLinkStatus, setReqLinkStatus] = useState(false);
-  // const [isAdmin, setIsAdmin] = useState(false);
-  // const {user, isUserInfoReady} = useContext(UserContext)
-  // const [login, setLogin] = useState(false);
   const {user} = useContext(UserContext);
   const { resName } = useParams();
+  const [isOpen, setIsOpen] = useState(false);
 
+  const toggleNav = () =>{
+    setIsOpen(prev => !prev);
+  }
 
-  
-  // useEffect(() => {
-
-  //   console.log(document.cookie);
-
-  //   if(user){
-  //     setLogin(true);
-  //   }
-    
-  //   if(isUserInfoReady && user && user.Role === 0){
-  //     setReqLinkStatus(true);
-  //   }
-    
-  //   if(isUserInfoReady && user && user.is_admin){
-  //     setIsAdmin(true);
-  //   }
-    
-  //   console.log(user);
-    
-  // }, [login, isUserInfoReady, user]);
-  
-  // if (!isUserInfoReady) {
-  //   return <Spinner />;
-  // }
   
 
   return (
     <>
-    <header className="bg-primary h-16  lg:h-[73px] -mx-4 md:-mx-20 px-4 md:px-20 flex justify-center items-center sticky top-0 z-20 rounded-b-xl">
+    <header className="bg-primary h-16  lg:h-[73px] -mx-4 md:-mx-20 flex-wrap px-4 md:px-20 flex justify-center items-center sticky top-0 z-20 rounded-b-xl">
         <nav className="flex items-center justify-between w-full">
             
             <Link to={'/'}>
@@ -61,8 +38,8 @@ const Navbar = () => {
             </div>
 
             <div className="flex items-center gap-4 md:gap-6">
-                <div className="max-sm:block hidden hover:cursor-pointer" >
-                  <RxHamburgerMenu className="text-white text-4xl border-[2px] border-white  p-1 rounded-md" />
+                <div className="max-sm:block hidden hover:cursor-pointer" onClick={toggleNav} >
+                  {isOpen ? <XIcon/> : <HamIcon/>}
                 </div>
                 <Button to="/" className="max-sm:hidden  hover:shadow-lg hover:text-primary hover:bg-white" name="Home"/>
                 <Button to="/admin/add" className={"max-sm:hidden hover:shadow-lg hover:text-primary hover:bg-white" + (user && user.is_admin ? "" : " hidden ")} name="Add"/>
@@ -71,8 +48,17 @@ const Navbar = () => {
                 <Button to={user ? "/profile" : "/login"} className={"max-sm:hidden hover:shadow-lg hover:text-primary hover:bg-white "} name="Profile" />
                 <Button to={user ? "/" : "/login"} name="Login"  className={"max-sm:hidden hover:shadow-lg hover:bg-white hover:text-primary hover:underline hover:outline-none " + (!user ? "" : "hidden ")}/>
             </div>
-            
         </nav>
+
+        {isOpen && <div className="flex flex-col  bg-primary  w-full sm:hidden">
+            <Link to="/" className="text-white hover:bg-[#006eff] text-center text-lg font-semibold border-t w-full p-2">Home</Link>
+            <Link to="/admin/add" className={"text-white hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>Add</Link>
+            <Link to="/admin/view" className={"text-white hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>View</Link>
+            <Link to={user ? "/requests" : "/login"} className={"text-white hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.Role < 2 && " hidden ")}>Requests</Link>
+            <Link to={user ? "/profile" : "/login"} className="text-white hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 ">Profile</Link>
+            <Link to={user ? "/" : "/login"} className={"text-white hover:bg-[#006eff] text-center text-lg font-semibold border-y p-2 " + (!user ? "" : "hidden ")}>Login</Link>
+        </div>}
+
     </header>
 
     </>
