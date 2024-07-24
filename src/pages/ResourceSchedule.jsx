@@ -81,6 +81,7 @@ const ResourceSchedule = () => {
           }
         )
         .then((response) => {
+          setResAPIError(false);
           setBooking(response.data.bookings);
         })
         .catch((error) => {
