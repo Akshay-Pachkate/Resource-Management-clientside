@@ -62,7 +62,7 @@ const ResourceSchedule = () => {
   const [daysToDisplay, setDaysToDisplay] = useState(7);
   const [bookedSlots, setBookedSlots] = useState(null);
   const [some, setSome] = useState(null);
-
+  const [resAPIError, setResAPIError] = useState(false);
   const [booking, setBooking] = useState(null);
 
 
@@ -84,6 +84,7 @@ const ResourceSchedule = () => {
           setBooking(response.data.bookings);
         })
         .catch((error) => {
+          setResAPIError(true);
           console.log(error);
         });
 
@@ -167,6 +168,13 @@ const ResourceSchedule = () => {
       setCurrDate(dayjs());
     }
   };
+
+
+  if(resAPIError){
+    return <div className="w-full mt-4">
+      <img className="mx-auto" src="https://t4.ftcdn.net/jpg/05/24/04/51/360_F_524045110_UXnCx4GEDapddDi5tdlY96s4g0MxHRvt.jpg" alt="" />
+    </div>
+  }
 
 
 

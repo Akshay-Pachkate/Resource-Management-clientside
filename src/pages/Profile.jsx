@@ -48,6 +48,7 @@ const Profile = () => {
   const [requests, setRequests] = useState(null);
   const { user, setUser, isUserInfoReady } = useContext(UserContext);
   const [requestUpdate, setRequestUpdate] = useState(false);
+  const [resAPIError, setResAPIError] = useState(false);
 
 
 
@@ -86,9 +87,9 @@ const Profile = () => {
       .then(({ data }) => {
         const requestData = data.data;
         setRequests(requestData.reverse());
-        console.log(requestData);
       })
       .catch((error) => {
+        setResAPIError(true);
         console.log(error);
       });
   }, [requestUpdate, user]);
@@ -114,11 +115,17 @@ const Profile = () => {
     return <Navigate to="/login" />;
   }
 
+  if(resAPIError){
+    return <div className="w-full mt-4">
+      <img className="mx-auto" src="https://t4.ftcdn.net/jpg/05/24/04/51/360_F_524045110_UXnCx4GEDapddDi5tdlY96s4g0MxHRvt.jpg" alt="" />
+    </div>
+  }
+
   const steps = ["You", "Teacher", "Resource Head", "Principle", "Director"];
 
   return (
     <>
-      <div className=" mx-auto rounded-xl  grid grid-cols-4 gap-4 p-6 w-[99%] sm:w-[70%] md:[60%] mt-8 bg-gray-100">
+      <div className=" mx-auto rounded-xl  grid grid-cols-4 gap-4 p-6 max-sm:w-[100%] md:w-[80%] sm:max-md:w-[90%] mt-8 bg-gray-100">
         {isUserInfoReady && user && (
           <div className="col-span-3 gap-6  grid grid-cols-2 px-4 ">
             <ReqFieldItem
@@ -138,8 +145,8 @@ const Profile = () => {
           </div>
         )}
 
-        <div className="flex flex-col justify-end gap-2">
-          <button  onClick={handleOpen} className="text-md transition-all duration-300 text-center  font-semibold text-white border border-white px-4 py-2 cursor-pointer rounded-xl bg-gray-500 hover:bg-gray-800 hover:text-white">
+        <div className="flex flex-col justify-end gap-2 ">
+          <button  onClick={handleOpen} className="text-md transition-all duration-300 text-center font-semibold text-white border border-white px-4 py-2 cursor-pointer rounded-xl bg-gray-500 hover:bg-gray-800 hover:text-white">
             Edit
           </button>
           <button onClick={handleOpenChangePass} className="text-md transition-all duration-300 text-center  font-semibold text-white border border-white px-4 py-2 cursor-pointer rounded-xl bg-gray-500 hover:bg-gray-800 hover:text-white">
