@@ -51,12 +51,12 @@ const Navbar = () => {
         </nav>
 
         {isOpen && <div className="flex flex-col z-50 bg-primary  w-full rounded-b-lg sm:hidden">
-            <Link to="/" className="text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t w-full p-2">Home</Link>
-            <Link to="/admin/add" className={"text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>Add</Link>
-            <Link to="/admin/view" className={"text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>View</Link>
-            <Link to={user ? "/requests" : "/login"} className={"text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.Role < 2 && " hidden ")}>Requests</Link>
-            <Link to={user ? "/profile" : "/login"} className="text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 ">Profile</Link>
-            <Link to={user ? "/" : "/login"} className={"text-white z-50 hover:bg-[#006eff]  text-center text-lg font-semibold border-y p-2 " + (!user ? "" : "hidden ")}>Login</Link>
+            <Link onClick={toggleNav} to="/" className="text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t w-full p-2">Home</Link>
+            <Link onClick={toggleNav} to="/admin/add" className={"text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>Add</Link>
+            <Link onClick={toggleNav} to="/admin/view" className={"text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.is_admin ? "" : " hidden ")}>View</Link>
+            <Link onClick={toggleNav} to={user ? "/requests" : "/login"} className={"text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 " + (user && user.Role < 2 && " hidden ")}>Requests</Link>
+            <Link onClick={toggleNav} to={user ? "/profile" : "/login"} className="text-white z-50 hover:bg-[#006eff] text-center text-lg font-semibold border-t p-2 ">Profile</Link>
+            <Link onClick={toggleNav} to={user ? "/" : "/login"} className={"text-white z-50 hover:bg-[#006eff]  text-center text-lg font-semibold border-y p-2 " + (!user ? "" : "hidden ")}>Login</Link>
         </div>}
 
     </header>
