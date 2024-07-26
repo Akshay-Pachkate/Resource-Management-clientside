@@ -12,7 +12,7 @@ export const ResourceCategories = {
 };
 
 export const AllResources = [
-    {res: 'Auditorium F1', type: 'Auditoriums'},
+    {res: 'Auditorium', type: 'Auditoriums'},
     {res: 'IT Seminar Hall', type: 'Auditoriums'},
     {res: 'COMP Seminar Hall', type: 'Auditoriums'},
     {res: 'ENTC Seminar Hall', type: 'Auditoriums'},
@@ -23,4 +23,15 @@ export const AllResources = [
     {res: 'Mic', type: 'Logistics'},
     {res: 'Podium', type: 'Logistics'},
     {res: 'Camera', type: 'Logistics'},
+];
+
+
+
+export const ResourceTypes = [
+    'Auditoriums',
+    'Display Boards',
+    'Logistics',
+    'Classrooms',
+    'Lawn',
+    'Court'
 ];
