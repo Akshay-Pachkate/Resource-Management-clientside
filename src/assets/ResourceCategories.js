@@ -30,8 +30,8 @@ export const AllResources = [
 export const ResourceTypes = [
     'Auditoriums',
     'Display Boards',
+    'Lawn',
     'Logistics',
     'Classrooms',
-    'Lawn',
     'Court'
 ];

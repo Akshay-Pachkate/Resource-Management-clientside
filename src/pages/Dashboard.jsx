@@ -23,26 +23,11 @@ const Dashboard = () => {
   }, [filters])
 
   // function to search for resources
-  const search = () => {
-    if(searchVal.trim() !== ""){
-      const filteredRes = AllResources.filter(res => {
-        if(res.res.toLowerCase().includes(searchVal.trim().toLowerCase())){
-          return res;
-        }
-      })
-
-      // unchecking the checkboxes & changing the filters array
-      filters.map(filter => document.getElementById(filter).checked = false);
-      setFilters([]);
-
-      setResources(filteredRes);
-      setSearchVal("");
-    } 
-  }
+  
 
   const updateFilter = (event) => {
-    const { id } = event.target;
-    if(filters.includes(id)){
+    const { id, checked} = event.target;
+    if(!checked){
       setFilters(prev => prev.filter(filter => filter !== id));
     }else{
       setFilters(prev => [...prev, id]);
@@ -50,6 +35,20 @@ const Dashboard = () => {
     
   }
   
+  const search = () => {
+
+    console.log(searchVal);
+    
+    if(searchVal.trim() !== ""){
+      let filteredRes = resources.filter(res => {
+        if(res.res.toLowerCase().includes(searchVal.trim().toLowerCase())){
+          return res;
+        }
+      })
+
+      setResources(filteredRes);
+    } 
+  }
 
 
 
@@ -61,7 +60,7 @@ const Dashboard = () => {
         <aside className="flex flex-col max-md:gap-0 max-md:bg-gray-50 max-md:rounded-xl gap-4 w-[25%] max-md:w-full md:max-lg:w-[30%]" >
           <div className="flex gap-4 md:bg-gray-50 p-4 justify-center items-center rounded-lg " >
             <TextField onChange={e => setSearchVal(e.target.value)}  id="outlined-basic" label="Type Resource name" variant="outlined" size="small" />
-            <button onClick={search} className='px-2 py-1 bg-primary text-white rounded-lg h-full' >Search</button>  
+            <button onClick={() => search()} className='px-2 py-1 bg-primary text-white rounded-lg h-full' >Search</button>  
           </div> 
           
           
