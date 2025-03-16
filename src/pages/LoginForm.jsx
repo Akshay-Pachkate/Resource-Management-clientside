@@ -4,8 +4,6 @@ import axios from "axios";
 import {Navigate} from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import { UserContext } from '../context/userContext';
-import Cookie from 'js-cookie';
-import { getCookie } from '../utilities/getCSRF';
 
 
 
@@ -20,9 +18,6 @@ const Login = () => {
         event.preventDefault();
         try {
             const response = await axios.post('/login/', {email, password, withCredentials: true});
-
-            console.log(Cookie.get('csrftoken'));    
-            console.log(getCookie('csrftoken'));
 
             if(response.data.status === 200){
                 setRedirect(true);

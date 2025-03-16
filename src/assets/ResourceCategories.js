@@ -12,17 +12,17 @@ export const ResourceCategories = {
 };
 
 export const AllResources = [
-    {res: 'Auditorium', type: 'Auditoriums'},
-    {res: 'IT Seminar Hall', type: 'Auditoriums'},
-    {res: 'COMP Seminar Hall', type: 'Auditoriums'},
-    {res: 'ENTC Seminar Hall', type: 'Auditoriums'},
-    {res: 'F Building Display', type: 'Display Boards'},
-    {res: 'A1 Building Display', type: 'Display Boards'},
-    {res: 'Lawn', type: 'Lawn'},
-    {res: 'basketball court', type: 'Court'},
-    {res: 'Mic', type: 'Logistics'},
-    {res: 'Podium', type: 'Logistics'},
-    {res: 'Camera', type: 'Logistics'},
+    {res: 'Auditorium', type: 'Auditoriums', location: 'F1-101', capacity: 150, imgUrl: '/images/auditorium.jpg'},
+    {res: 'IT Seminar Hall', type: 'Auditoriums', location: 'A3-110', capacity: 100, imgUrl: '/images/it-sh.jpg'},
+    {res: 'COMP Seminar Hall', type: 'Auditoriums', location: 'A1-109', capacity: 100, imgUrl: '/images/comp-sh.jpg'},
+    {res: 'ENTC Seminar Hall', type: 'Auditoriums', location: 'A3-108', capacity: 100, imgUrl: '/images/it-sh.jpg'},
+    {res: 'F Building Display', type: 'Display Boards', location: 'F Building', imgUrl: '/images/a1-db.jpg'},
+    {res: 'A1 Building Display', type: 'Display Boards', location: 'A1 Building', imgUrl: '/images/a1-db.jpg'},
+    {res: 'Lawn', type: 'Lawn', imgUrl: '/images/lawn.jpg'},
+    {res: 'basketball court', type: 'Court', imgUrl: '/images/court.jpg'},
+    {res: 'Mic', type: 'Logistics', imgUrl: '/images/mic.jpg'},
+    {res: 'Podium', type: 'Logistics', imgUrl: '/images/podium.jpg'},
+    {res: 'Camera', type: 'Logistics', imgUrl: '/images/camera.jpg'},
 ];
 
 

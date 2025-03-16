@@ -13,24 +13,13 @@ import ViewUser from "./pages/admin/ViewUser"
 import { UserContext, UserContextProvider } from "./context/userContext"
 import {SnackbarProvider} from 'notistack';
 import { useContext, useEffect, useState } from "react"
+import DefaultPage from "./pages/DefaultPage"
 
 axios.defaults.baseURL = 'https://pictresource.pythonanywhere.com';
 axios.defaults.withCredentials = true;
 
 
 const App = () => {
-
-  const {isUserInfoReady, user} = useContext(UserContext);
-  const [login, setLogin] = useState(null);
-
-  useEffect(() => {
-    if(user && user.status === 200){
-      setLogin(true);
-    } else {
-      setLogin(false);
-    }
-  }, [login, isUserInfoReady, user]);
-
   return (
     <UserContextProvider>
       <SnackbarProvider 
@@ -52,6 +41,7 @@ const App = () => {
               <Route path="/login" element={<LoginForm/>} />
               <Route path="/bookSlot" element={<BookSlot/>} />
               <Route path="/admin/view" element={<ViewUser/>} />
+              <Route path="/*" element={<DefaultPage/>}/>
             </Route>
           </Routes>
         </HashRouter>

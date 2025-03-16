@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useParams, useRouteError } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CalDaySchedule from "../components/CalDaySchedule";
 import { getDay } from "../utilities/dateUtils";
 import { time } from "../assets/Times";
@@ -12,7 +12,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ThemeProvider } from "@emotion/react";
-import { createTheme, duration } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import axios from "axios";
 
 import {
@@ -25,9 +25,9 @@ import BookSlot from './BookSlot.jsx'
 
 // modal
 import Modal from '@mui/material/Modal';
-import { getCookie } from "../utilities/getCSRF.js";
+// import { getCookie } from "../utilities/getCSRF.js";
 import { getTimeIndex } from "../utilities/timeUtils.js";
-import Navbar from "../components/Navbar.jsx";
+// import Navbar from "../components/Navbar.jsx";
 import { UserContext } from "../context/userContext.jsx";
 import Spinner from "../components/Spinner.jsx";
 
@@ -35,16 +35,16 @@ import Spinner from "../components/Spinner.jsx";
 dayjs.extend(utc);
 
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  p: 4,
-};
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: 400,
+//   bgcolor: 'background.paper',
+//   border: '2px solid #000',
+//   p: 4,
+// };
 
 
 
@@ -59,9 +59,9 @@ const ResourceSchedule = () => {
   const handleClose = () => setOpen(false);
   const { resName } = useParams();
   const [currDate, setCurrDate] = useState(dayjs());
-  const [daysToDisplay, setDaysToDisplay] = useState(7);
-  const [bookedSlots, setBookedSlots] = useState(null);
-  const [some, setSome] = useState(null);
+  const [daysToDisplay] = useState(7);
+  const [bookedSlots] = useState(null);
+  const [some] = useState(null);
   const [resAPIError, setResAPIError] = useState(false);
   const [booking, setBooking] = useState(null);
 
@@ -124,22 +124,7 @@ const ResourceSchedule = () => {
 
 
 
-  const newTheme = (theme) =>
-    createTheme({
-      ...theme,
-      components: {
-        MuiDateCalendar: {
-          styleOverrides: {
-            root: {
-              color: "#007BFF",
-              borderRadius: 13,
-              borderColor: "#ffffff",
-              backgroundColor: "#ffffff",
-            },
-          },
-        },
-      },
-    });
+
 
   const getWeek = (currentDate) => {
     const week = [];
@@ -195,19 +180,17 @@ const ResourceSchedule = () => {
             </button>
           </div>
 
-          <div>
+          
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <ThemeProvider theme={newTheme}>
                 <DatePicker
                   disablePast
                   label={`Check Availability of ${resName}`}
                   value={currDate}
-                  onChange={(date) => setCurrDate(date.date(date.date() - 3))}
+                  onChange={(date) => setCurrDate(date)}
                   defaultValue={currDate}
                 />
-              </ThemeProvider>
             </LocalizationProvider>
-          </div>
+          
 
         </div>
 
@@ -240,7 +223,6 @@ const ResourceSchedule = () => {
 
           <div className="-z-40" >
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <ThemeProvider theme={newTheme}>
                 <DatePicker
                   disablePast
                   label={`Check Availability of ${resName}`}
@@ -248,7 +230,6 @@ const ResourceSchedule = () => {
                   onChange={(date) => setCurrDate(date.date(date.date() - 3))}
                   defaultValue={currDate}
                 />
-              </ThemeProvider>
             </LocalizationProvider>
           </div>
 
